@@ -1,2 +1,8 @@
-# eorc20-snapshot
-EORC20 Snapshot
+# EORC20 Snapshot
+
+### Quickstart
+
+```
+npm install
+npm start
+```

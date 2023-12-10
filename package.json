@@ -1,0 +1,9 @@
+{
+  "private": true,
+  "type": "module",
+  "dependencies": {
+    "@substreams/core": "^0.8.0",
+    "@substreams/manifest": "^0.7.0",
+    "@substreams/node": "^0.5.0"
+  }
+}
