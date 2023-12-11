@@ -26,6 +26,15 @@ const request = createRequest({
 // NodeJS Events
 const emitter = new BlockEmitter(transport, request, registry);
 
+export interface Download {
+  evm_trx_id: string;
+  eos_trx_id: string;
+  eos_block_number: number;
+  timestamp: string;
+  miner: string;
+  rlptx: string;
+}
+
 // Stream Blocks
 const writer = fs.createWriteStream("pushtx.jsonl", {flags: "a"});
 emitter.on("anyMessage", (message: any, cursor, clock) => {
@@ -35,7 +44,7 @@ emitter.on("anyMessage", (message: any, cursor, clock) => {
     for ( const action of trace.actionTraces) {
       if ( action.action.name !== "pushtx" ) continue;
       const { miner, rlptx } = JSON.parse(action.action.jsonData);
-      const data = {
+      const row: Download = {
         evm_trx_id: toTransactionId(`0x${rlptx}`),
         eos_trx_id: trace.id,
         eos_block_number: trace.blockNum,
@@ -43,7 +52,7 @@ emitter.on("anyMessage", (message: any, cursor, clock) => {
         miner,
         rlptx,
       }
-      writer.write(JSON.stringify(data) + "\n");
+      writer.write(JSON.stringify(row) + "\n");
     }
   }
 });
