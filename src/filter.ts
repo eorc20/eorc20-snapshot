@@ -5,7 +5,6 @@ import { Download } from "./download.js";
 import { eorc20 } from "./utils.js";
 
 const writer = fs.createWriteStream("pushtx-filter.jsonl");
-const tokens = new Map<string, number>();
 
 // create a readline interface for reading the file line by line
 const rl = readline.createInterface({
@@ -13,7 +12,7 @@ const rl = readline.createInterface({
   crlfDelay: Infinity
 });
 
-interface Filter {
+export interface Filter {
   trx_id: string;
   timestamp: string;
   to: `0x${string}`;
@@ -37,12 +36,10 @@ rl.on('line', (line) => {
       timestamp: download.timestamp,
     };
     writer.write(JSON.stringify(row) + "\n");
-    tokens.set(tx.to, 1 + (tokens.get(tx.to) || 0));
   }
 });
 
 // log the parsed JSON objects once the file has been fully read
 rl.on('close', () => {
   console.log("done");
-  fs.writeFileSync("tokens.json", JSON.stringify([...tokens.entries()]));
 });
