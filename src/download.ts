@@ -2,10 +2,9 @@ import { createRegistry, createRequest, applyParams } from "@substreams/core";
 import { readPackage } from "@substreams/manifest";
 import { BlockEmitter, createNodeTransport } from "@substreams/node";
 import { token, baseUrl, manifest, outputModule, params, startBlockNum, stopBlockNum } from "./config.js";
-import { clockToDay, readCursor, saveCursor } from "./utils.js";
+import { readCursor, saveCursor } from "./utils.js";
 import fs from "fs";
 import { toTransactionId } from "./evm.js";
-import { parseTransaction } from "viem";
 
 // Read Substream
 const substreamPackage = await readPackage(manifest);

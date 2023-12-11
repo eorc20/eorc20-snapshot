@@ -1,10 +1,11 @@
+import fs from "fs";
 import { parseTransaction } from "viem";
 import readline from "readline";
-import * as jsonl from "node-jsonl";
 import { Download } from "./download.js";
-import fs from "fs";
+import { eorc20 } from "./utils.js";
 
-const eorc20 = "0x646174613a2c7b2270223a22656f72633230222c226f70223a226d696e74222c227469636b223a22656f7373222c22616d74223a223130303030227d"
+const writer = fs.createWriteStream("pushtx-filter.jsonl");
+const tokens = new Map<string, number>();
 
 // create a readline interface for reading the file line by line
 const rl = readline.createInterface({
@@ -12,11 +13,10 @@ const rl = readline.createInterface({
   crlfDelay: Infinity
 });
 
-interface Parse extends Download {
+interface Filter {
+  trx_id: string;
+  timestamp: string;
   to: `0x${string}`;
-  nonce: number;
-  gas: number;
-  gasPrice: number;
 }
 
 // read each line of the file and parse it as JSON
@@ -31,24 +31,18 @@ rl.on('line', (line) => {
   if ( !tx.gasPrice) return;
 
   if ( tx.data === eorc20 ) {
-    const row: Parse = {
-      ...download,
+    const row: Filter = {
       to: tx.to,
-      nonce: tx.nonce,
-      gas: Number(tx.gas),
-      gasPrice: Number(tx.gasPrice),
+      trx_id: download.evm_trx_id,
+      timestamp: download.timestamp,
     };
-    console.log(row);
+    writer.write(JSON.stringify(row) + "\n");
+    tokens.set(tx.to, 1 + (tokens.get(tx.to) || 0));
   }
 });
 
 // log the parsed JSON objects once the file has been fully read
 rl.on('close', () => {
   console.log("done");
+  fs.writeFileSync("tokens.json", JSON.stringify([...tokens.entries()]));
 });
-
-// const rlptx = "0xf86d830b916e8522ecb25c008301e84894bbbbbbbbbbbbbbbbbbbbbbbb55318063a000000080b83c646174613a2c7b2270223a22656f72633230222c226f70223a226d696e74222c227469636b223a22656f7373222c22616d74223a223130303030227d1b808855318063a0000000";
-
-// const tx = parseTransaction(rlptx);
-
-// console.log(tx);
