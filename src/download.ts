@@ -5,6 +5,7 @@ import { token, baseUrl, manifest, outputModule, params, startBlockNum, stopBloc
 import { readCursor, saveCursor } from "./utils.js";
 import fs from "fs";
 import { toTransactionId } from "./evm.js";
+import logUpdate from 'log-update';
 
 // Read Substream
 const substreamPackage = await readPackage(manifest);
@@ -34,6 +35,10 @@ export interface Download {
   rlptx: string;
 }
 
+let start = 0;
+let timestamp = 0
+let count = 0;
+
 // Stream Blocks
 const writer = fs.createWriteStream("pushtx.jsonl", {flags: "a"});
 emitter.on("anyMessage", (message: any, cursor, clock) => {
@@ -52,6 +57,17 @@ emitter.on("anyMessage", (message: any, cursor, clock) => {
         rlptx,
       }
       writer.write(JSON.stringify(row) + "\n");
+
+      // logging
+      const now = Math.floor(Date.now() / 1000);
+      if ( start === 0 ) start = now;
+      count += 1;
+      if ( timestamp !== now ) {
+        timestamp = now;
+        const elapsed = (timestamp - start);
+        const rate = Math.floor(count / elapsed);
+        logUpdate(`rate: ${rate}/s | count: ${count} | elapsed: ${elapsed} | timestamp: ${trace.blockTime.split(".")[0].replace("Z", "")} | block: ${trace.blockNum}`);
+      }
     }
   }
 });
