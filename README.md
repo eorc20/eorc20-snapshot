@@ -2,9 +2,9 @@
 
 ### Snapshots
 
-| File                  | Addresses | Supply   | Checksum256  |
-| ----------------------|-----------|----------|------------- |
-| [eoss-snapshot-v1.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v1/eoss-snapshot-v1.csv)  | 21095     | 21000000 | 2475f...c4733
+| Version | File                  | Addresses | Supply   | Checksum256  |
+| --------|----------------------|-----------|----------|------------- |
+| V1      | [eoss-snapshot-v1.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v1/eoss-snapshot-v1.csv)  | 21095     | 21000000 | 2475f...c4733
 
 ### Checksum256
 
