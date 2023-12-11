@@ -3,6 +3,7 @@ import { parseTransaction } from "viem";
 import readline from "readline";
 import { Download } from "./download.js";
 import { eorc20 } from "./utils.js";
+import logUpdate from 'log-update';
 
 const writer = fs.createWriteStream("pushtx-filter.jsonl");
 
@@ -17,6 +18,9 @@ export interface Filter {
   timestamp: string;
   to: `0x${string}`;
 }
+
+let timestamp = 0
+let total = 0;
 
 // read each line of the file and parse it as JSON
 rl.on('line', (line) => {
@@ -36,6 +40,14 @@ rl.on('line', (line) => {
       timestamp: download.timestamp,
     };
     writer.write(JSON.stringify(row) + "\n");
+  }
+
+  // logging
+  total += 1;
+  const now = Math.floor(Date.now() / 1000);
+  if ( timestamp !== now ) {
+    timestamp = now;
+    logUpdate(`${total}\n`);
   }
 });
 
