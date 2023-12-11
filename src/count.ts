@@ -25,7 +25,7 @@ rl.on('line', (line) => {
   const now = Math.floor(Date.now() / 1000);
   if ( timestamp !== now ) {
     timestamp = now;
-    logUpdate(`${total}\n`);
+    logUpdate(`total: ${total} | addresses: ${tokens.size}\n`);
   }
 });
 
@@ -34,5 +34,5 @@ rl.on('close', () => {
   for ( const [address, count] of tokens.entries() ) {
     writer.write(`${address},${count}\n`);
   }
-  logUpdate(`${total}\n`);
+  logUpdate(`total: ${total} | addresses: ${tokens.size}\n`);
 });

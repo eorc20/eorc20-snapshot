@@ -1,5 +1,11 @@
 # EORC20 Snapshot
 
+### Snapshots
+
+| file                  | Addresses | Supply   | Checksum256  |
+| ----------------------|-----------|----------|------------- |
+| [eoss-snapshot-v1.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v1/eoss-snapshot-v1.csv)  | 21095     | 21000000 | 2475f519afc50b5d876eb2e877a542536d21d96a48d311dfb556d0458bfc4733
+
 ### Get API key
 
 - https://app.pinax.network/
