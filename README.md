@@ -7,6 +7,10 @@
 | v2      | `eoss` | [eoss-snapshot-v2.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v2/eoss-snapshot-v2.csv)  | 21389     | 21000000 | 78015...148ef
 | v1      | `eoss` | [eoss-snapshot-v1.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v1/eoss-snapshot-v1.csv)  | 21095     | 21000000 | cb7b1...d791f
 
+### Airdrops
+
+- **COMING SOON**
+
 ### Checksum256
 
 ```bash
@@ -14,41 +18,75 @@ $ shasum -a 256 snapshot/v1/eoss-snapshot-v2.csv
 cb7b14be5c5bc1f4b26c2bf9fc55a012ffa31bd3ab02ab6870de17ab085d791f  snapshot/v2/eoss-snapshot-v2.csv
 ```
 
-### Get API key
+### Common inscription mistakes
 
-- https://app.pinax.network/
+- invalid eorc-20 inscription format
+  - invalid JSON parsing
+  - invalid `op` operation type
+- mint exceeding `lim` limit amounts
+- invalid `tick` symbol (must be 4 letters and lowercase)
 
-**.env**
-```env
-SUBSTREAMS_API_TOKEN="<API KEY>"
-```
+### References
 
-### Download `pushtx.jsonl` from Substreams
+- https://domo-2.gitbook.io/eorc-20-experiment/
 
-```
-$ npm install
-$ npm run download
-```
+### EORC-20
 
-### Filtered Data
+### `deploy`
 
 ```json
 {
-  "to": "0x910cba72870aaca57bdfc8a98a76ba46f0a08573",
-  "trx_id": "0xa24411312e1dffac1618c6d600f917c4b106e736982dbad999a26cd6ab32ac8e",
-  "timestamp": "2023-12-09T03:13:50Z"
+  "p": "eorc-20",
+  "op": "deploy",
+  "tick": "eoss",
+  "max": "210000000000",
+  "lim": "1000"
 }
 ```
 
-### Detailed Data
+| key    | required? | description |
+| ------ | --------- | ----------- |
+| `p`    | yes       | Protocol: Helps other systems identify and process eorc-20 events
+| `op`   | yes       | Operation: Type of event (`deploy`, `mint`, `transfer`)
+| `tick` | yes       | Ticker: 4 letter identifier of the eorc-20
+| `max`  | yes       | Max Supply: Maximum supply of the eorc-20
+| `lim`  | no        | Mint limit: If letting users mint to themsleves, limit per inscription
+| `dec`  | no        | Decimals: set decimal precision, default to 4
+
+### `mint`
 
 ```json
 {
-  "evm_trx_id": "0xecc6a6aa41055331e097fa5729e6c35892daeb8cd1583324278628124e993711",
-  "eos_trx_id": "ecbdfebeede514386bac233bfa521cec02ef4f57acd4e64667a427c0c99b5a05",
-  "eos_block_number": "345983337",
-  "timestamp": "2023-12-10T04:28:12Z",
-  "miner": "eosio.evm",
-  "rlptx": "f86d834cd3ea8522ecb25c008301e84894bbbbbbbbbbbbbbbbbbbbbbbb55318063a000000080b83c646174613a2c7b2270223a22656f72633230222c226f70223a226d696e74222c227469636b223a22656f7373222c22616d74223a223130303030227d1b808855318063a0000000"
+  "p": "eorc-20",
+  "op": "mint",
+  "tick": "eoss",
+  "amt": "10000"
 }
 ```
+
+| key    | required? | description |
+| ------ | --------- | ----------- |
+| `p`    | yes       | Protocol: Helps other systems identify and process eorc-20 events
+| `op`   | yes       | Operation: Type of event (`deploy`, `mint`, `transfer`)
+| `tick` | yes       | Ticker: 4 letter identifier of the eorc-20
+| `amt`  | yes       | Amount to mint: States the amount of the eorc-20 to mint. Has to be less than "lim" above if stated
+
+### `transfer`
+
+```json
+{
+  "p": "eorc-20",
+  "op": "transfer",
+  "tick": "eoss",
+  "amt": "10000"
+}
+```
+
+| key    | required? | description |
+| ------ | --------- | ----------- |
+| `p`    | yes       | Protocol: Helps other systems identify and process eorc-20 events
+| `op`   | yes       | Operation: Type of event (`deploy`, `mint`, `transfer`)
+| `tick` | yes       | Ticker: 4 letter identifier of the eorc-20
+| `amt`  | yes       | Amount to mint: States the amount of the eorc-20 to mint. Has to be less than "lim" above if stated
+| ~~`to`~~ | ~~No~~      | ~~Address to send to: States the receiving address. If left blank logic will presume that the receiver of the transfer is correct.~~
+| ~~`fee`~~| ~~No~~      | ~~Transfer fee: For tracking without taproot data purposes only~~
