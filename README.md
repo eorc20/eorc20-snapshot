@@ -1,16 +1,17 @@
-# EORC20 Snapshot
+# EORC20 Snapshots
 
 ### Snapshots
 
 | Version | Symbol | File                 | Addresses | Supply   | Checksum256  |
 | --------|--------|--------------|-----------|----------|------------- |
+| v2      | `eoss` | [eoss-snapshot-v2.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v2/eoss-snapshot-v2.csv)  | 21389     | 21000000 | 78015...148ef
 | v1      | `eoss` | [eoss-snapshot-v1.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v1/eoss-snapshot-v1.csv)  | 21095     | 21000000 | 2475f...c4733
 
 ### Checksum256
 
 ```bash
-$ shasum -a 256 snapshot/v1/eoss-snapshot-v1.csv
-2475f519afc50b5d876eb2e877a542536d21d96a48d311dfb556d0458bfc4733  snapshot/v1/eoss-snapshot-v1.csv
+$ shasum -a 256 snapshot/v1/eoss-snapshot-v2.csv
+780156bb14eee5036ef87f5253db7caae05937747b3d7cef0d7a2c63f05148ef  snapshot/v2/eoss-snapshot-v2.csv
 ```
 
 ### Get API key
