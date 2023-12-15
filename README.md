@@ -4,6 +4,7 @@
 
 | Version | Symbol | File                 | Addresses | Supply   | Checksum256  |
 | --------|--------|--------------|-----------|----------|------------- |
+| v3      | `eoss` | [eoss-snapshot-v3.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v3/eoss-snapshot-v3.csv)  | 21373     | 21000000 | d26b9...36ed1
 | v2      | `eoss` | [eoss-snapshot-v2.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v2/eoss-snapshot-v2.csv)  | 21389     | 21000000 | 78015...148ef
 | v1      | `eoss` | [eoss-snapshot-v1.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v1/eoss-snapshot-v1.csv)  | 21095     | 21000000 | cb7b1...d791f
 
@@ -14,8 +15,8 @@
 ### Checksum256
 
 ```bash
-$ shasum -a 256 snapshot/v1/eoss-snapshot-v2.csv
-cb7b14be5c5bc1f4b26c2bf9fc55a012ffa31bd3ab02ab6870de17ab085d791f  snapshot/v2/eoss-snapshot-v2.csv
+$ shasum -a 256 snapshot/v1/eoss-snapshot-v3.csv
+d26b90876ec6760ecf1030808d03137d01f88df7d906bf6f5fc1431f51936ed1  snapshot/v3/eoss-snapshot-v3.csv
 ```
 
 ### Common inscription mistakes
