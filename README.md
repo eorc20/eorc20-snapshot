@@ -20,7 +20,7 @@ d26b90876ec6760ecf1030808d03137d01f88df7d906bf6f5fc1431f51936ed1  snapshot/v3/eo
 - invalid eorc-20 inscription format
   - invalid JSON parsing
   - invalid `op` operation type
-- mint exceeding `lim` limit amounts
+- mint `amt` does not match `lim` amounts
 - invalid `tick` symbol (must be 4 letters and lowercase)
 
 ### References
