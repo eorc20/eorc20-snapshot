@@ -1,12 +1,12 @@
-# EORC20 Snapshots
+# EORC-20 Snapshots
 
 ### Snapshots
 
-| Version | Symbol | File                 | Addresses | Supply   | Checksum256  |
-| --------|--------|--------------|-----------|----------|------------- |
-| v3      | `eoss` | [eoss-snapshot-v3.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v3/eoss-snapshot-v3.csv)  | 21373     | 21000000 | d26b9...36ed1
-| v2      | `eoss` | [eoss-snapshot-v2.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v2/eoss-snapshot-v2.csv)  | 21389     | 21000000 | 78015...148ef
-| v1      | `eoss` | [eoss-snapshot-v1.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v1/eoss-snapshot-v1.csv)  | 21095     | 21000000 | cb7b1...d791f
+| Version | Ticker | File                 | Addresses | Max Supply   | Checksum256  |
+| --------|--------|----------------------|-----------|----------|------------- |
+| v3      | `eoss` | [eoss-snapshot-v3.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v3/eoss-snapshot-v3.csv)  | 21373     | 210000000000 | d26b9...36ed1
+| v2      | `eoss` | [eoss-snapshot-v2.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v2/eoss-snapshot-v2.csv)  | 21389     | 210000000000 | 78015...148ef
+| v1      | `eoss` | [eoss-snapshot-v1.csv](https://raw.githubusercontent.com/pinax-network/eorc20-snapshot/main/snapshot/v1/eoss-snapshot-v1.csv)  | 21095     | 210000000000 | cb7b1...d791f
 
 ### Checksum256
 
